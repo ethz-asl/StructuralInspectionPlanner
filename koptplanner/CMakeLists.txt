@@ -23,7 +23,7 @@ find_package(cmake_modules REQUIRED)
 find_package(optec REQUIRED)
 find_package(Eigen REQUIRED)
 
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
 
 ################################################
 ## Declare ROS messages, services and actions ##
