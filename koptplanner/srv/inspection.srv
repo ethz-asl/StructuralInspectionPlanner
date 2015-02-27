@@ -1,0 +1,20 @@
+std_msgs/Header header
+float64[] spaceCenter
+float64[] spaceSize
+int32[] obstacleIntransparancy
+geometry_msgs/Pose[] requiredPoses
+geometry_msgs/Polygon[] inspectionArea
+shape_msgs/SolidPrimitive[] obstacles
+geometry_msgs/Pose[] obstaclesPoses
+
+# incidence angle from surface plane
+float64 incidenceAngle
+float64 minDist
+float64 maxDist
+int16 numIterations
+
+----------------------------------------------
+
+nav_msgs/Path inspectionPath
+float64 cost
+int8 errorCode

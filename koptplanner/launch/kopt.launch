@@ -1,0 +1,6 @@
+<launch>
+    <node name="Inspection_Planner" pkg="koptplanner" type="plan" clear_params="true" output="screen"> # launch-prefix="xterm -e gdb --args"
+	    <rosparam file="$(find koptplanner)/koptParam.yaml"/>
+    </node>
+</launch>
+
