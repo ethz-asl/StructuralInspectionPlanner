@@ -89,4 +89,4 @@ Contact:
 ---------------------------
 You can contact us for any question or remark:
 * [Andreas Bircher](mailto:bircher@gmx.ch)
-* [Kostas Alexis](konstantinos.alexis@mavt.ethz.ch)
+* [Kostas Alexis](mailto:konstantinos.alexis@mavt.ethz.ch)
