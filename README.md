@@ -28,9 +28,6 @@ Detailed Documentation
 ---------------------------
 Detailed documentation may be found at: StructuralInspectionPlanner/koptplanner/doc/doc.pdf
 
-Brief Usage Overview
----------------------------
-Information about how to use the planner is given below. Further information on how it works can be found in the manual or in the publication 'Structural Inspection Path Planner via Iterative Viewpoint Resampling with Application to Aerial Robotics', ICRA 2015.
 
 Displaying the planning process in rviz
 ---------------------------
@@ -55,6 +52,28 @@ Visualization
 ---------------------------
 Use the supplied MATLAB script ‘inspectionPathVisualization.m’ together with the generated file ‘inspectionScenario.m’.
 
-Further Questions
+References:
 ---------------------------
-You can always send me an email (bircher@gmx.ch) for questions. If you have any cool application, please also let me know! :)
+1. A. Bircher, K. Alexis, M. Burri, P. Oettershagen, S. Omari, T. Mantel and R. Siegwart, “Structural inspection path planning via iterative viewpoint resampling with application to aerial robotics,” in Robotics and Automation (ICRA), 2014 IEEE International Conference on, May 2015, (accepted).
+
+If you use this software in a scientific publication, please cite the following paper:
+```
+@INPROCEEDINGS{bircher15inspection, 
+author = "{A. Bircher, K. Alexis, M. Burri, P. Oettershagen, S. Omari, T. Mantel and R. Siegwart}",
+booktitle = {Robotics and Automation (ICRA), 2014 IEEE International Conference on}, 
+title={Structural Inspection Path Planning via Iterative Viewpoint Resampling with Application to Aerial Robotics},
+year={2015}, 
+month={May}, 
+note = {(accepted)},
+}
+```
+
+Credits:
+---------------------------
+This algorithm was developed by [Andreas Bircher](mailto:bircher@gmx.ch) with the help and support of the members of the [Autonomous Systems Lab](http://www.asl.ethz.ch). 
+
+Contact:
+---------------------------
+You can contact us for any question or remark:
+* [Andreas Bircher](mailto:bircher@gmx.ch)
+* [Kostas Alexis](konstantinos.alexis@mavt.ethz.ch)
