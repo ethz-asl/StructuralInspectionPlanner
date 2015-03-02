@@ -187,6 +187,6 @@ add_executable(plan
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(plan
-  optec_lib
+  ${optec_LIBRARIES}
   ${catkin_LIBRARIES}
 )
