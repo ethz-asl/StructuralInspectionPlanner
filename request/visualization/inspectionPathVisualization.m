@@ -7,10 +7,10 @@
 % computed using the provided planner.
 % 
 %% 
-clear all; close 8234;
+clear all; close all;
 run('inspectionScenario');
 
-handle = figure(8234);
+handle = figure;
 plot3(inspectionPath(:,1),inspectionPath(:,2),inspectionPath(:,3),'b', 'LineWidth', 2.0,'LineSmoothing', 'on');
 hold on;
 quiver3(inspectionPath(:,1),inspectionPath(:,2),inspectionPath(:,3),3*cos(inspectionPath(:,6)),3*sin(inspectionPath(:,6)),zeros(size(inspectionPath(:,1))),'g')
