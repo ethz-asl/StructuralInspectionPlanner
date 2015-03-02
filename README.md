@@ -30,10 +30,6 @@ Shell #2
 rosrun request request 
 ```
 
-Detailed Documentation
----------------------------
-Detailed documentation may be found at: StructuralInspectionPlanner/koptplanner/doc/doc.pdf
-
 
 Displaying the planning process in rviz
 ---------------------------
@@ -44,9 +40,11 @@ During planning the current best path and viewpoints are outputted to rviz. The 
 ‘Marker’ on topic ‘scenario’.
 To display the progress, chose ‘/kopt_frame’ as fixed frame or publish a suitable transform.
 
+
 Parameters
 ---------------------------
 Most parameters can be chosen as ros parameter (‘koptParam.yaml’). Additional parameters can be found in the file plan.hpp (e.g. Vehicle type).
+
 
 Starting the planner
 ---------------------------
@@ -54,9 +52,16 @@ To start the planner execute both commands in a shell:
 'roslaunch koptplanner kopt.launch' and
 'rosrun request request'
 
+
 Visualization
 ---------------------------
 Use the supplied MATLAB script ‘inspectionPathVisualization.m’ together with the generated file ‘inspectionScenario.m’.
+
+
+Detailed Documentation
+---------------------------
+Detailed documentation may be found at: StructuralInspectionPlanner/koptplanner/doc/doc.pdf
+
 
 References:
 ---------------------------
@@ -74,9 +79,11 @@ note = {(accepted)},
 }
 ```
 
+
 Credits:
 ---------------------------
 This algorithm was developed by [Andreas Bircher](mailto:bircher@gmx.ch) with the help and support of the members of the [Autonomous Systems Lab](http://www.asl.ethz.ch). The work was supported by the European Commission-funded projects [AEROWORKS](http://www.aeroworks2020.eu/) and [ICARUS](http://www.fp7-icarus.eu/). 
+
 
 Contact:
 ---------------------------
