@@ -5,7 +5,7 @@ A new structural inspection path planning algorithm presented in our paper contr
 
 Installing the toolbox
 ---------------------------
-To use the toolbox a recent ROS installation with catkin support and the following extra packages is required:
+To use the toolbox a ROS indigo installation with catkin set-up and the following extra packages are required:
 
 ```
 libeigen3-dev
@@ -14,7 +14,7 @@ ros-indigo-octomap
 ros-indigo-octomap-msgs
 ```
 
-A baseline example on how to get and install is the following:
+Once these are there, a baseline example on how to get and install the tool is the following:
 
 ```sh
 $ mkdir catkin_ws_repos # assuming you want to enter a new catkin directory
