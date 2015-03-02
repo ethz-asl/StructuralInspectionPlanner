@@ -10,13 +10,13 @@ To use the toolbox a recent ROS installation with catkin support is required. A 
 ```sh
 $ mkdir catkin_ws_repos # assuming you want to enter a new catkin directory
 $ cd catkin_ws_repos # alternatively just cd your normal catkin workspace
-$ catkin_init_workspace
-$ source devel/setup.bash
 $ mkdir src # assuming this folder does not exist
 $ cd src/
+$ catkin_init_workspace
 $ git clone git@github.com:ethz-asl/StructuralInspectionPlanner.git
 $ cd ..
 $ catkin_make
+$ source devel/setup.bash
 ```
 
 The build process should then be executed and successfully complete. Subsequently open two separate shells and run the following two commands to execute the baseline demo of the algorithm:
