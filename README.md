@@ -70,7 +70,7 @@ note = {(accepted)},
 
 Credits:
 ---------------------------
-This algorithm was developed by [Andreas Bircher](mailto:bircher@gmx.ch) with the help and support of the members of the [Autonomous Systems Lab](http://www.asl.ethz.ch). 
+This algorithm was developed by [Andreas Bircher](mailto:bircher@gmx.ch) with the help and support of the members of the [Autonomous Systems Lab](http://www.asl.ethz.ch). The work was supported by the European Commission-funded projects [AEROWORKS](http://www.aeroworks2020.eu/) and [ICARUS](http://www.fp7-icarus.eu/). 
 
 Contact:
 ---------------------------
