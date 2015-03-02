@@ -4,7 +4,7 @@ StructuralInspectionPlanner
 A new structural inspection path planning algorithm presented in our paper contribution [1] is released as an open-source toolbox. The algorithm assumes a triangular mesh representation of the structure and employs an alternating two-step optimization paradigm to find good viewpoints that together provide full coverage and a connecting path that has low cost. In every iteration, the viewpoints are chosen such that the connection cost is reduced and, subsequently, the tour is optimized. Vehicle and sensor limitations are respected within both steps. Sample implementations are provided for rotorcraft and fixed-wing unmanned aerial robots. 
 
 Installing the toolbox
-===========================
+---------------------------
 To use the toolbox a recent ROS installation with catkin support is required. A baseline example on how to get and install is the following:
 
 mkdir catkin_ws_repos # assuming you want to enter a new catkin directory
@@ -23,12 +23,11 @@ roslaunch koptplanner kopt.launch
 rosrun request request 
 
 Detailed Documentation
-===========================
+---------------------------
 Detailed documentation may be found at: StructuralInspectionPlanner/koptplanner/doc/doc.pdf
 
 Brief Usage Overview
-===========================
-
+---------------------------
 Information about how to use the planner is given below. Further information on how it works can be found in the manual or in the publication 'Structural Inspection Path Planner via Iterative Viewpoint Resampling with Application to Aerial Robotics', ICRA 2015.
 
 Displaying the planning process in rviz
