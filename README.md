@@ -7,16 +7,17 @@ Installing the toolbox
 ---------------------------
 To use the toolbox a recent ROS installation with catkin support is required. A baseline example on how to get and install is the following:
 
-mkdir catkin_ws_repos # assuming you want to enter a new catkin directory
-cd catkin_ws_repos # alternatively just cd your normal catkin workspace
-catkin_make 
-
-source devel/setup.bash
-mkdir src # assuming this folder does not exist
-cd src/
-git clone git@github.com:ethz-asl/StructuralInspectionPlanner.git
-cd ..
-catkin_make
+```sh
+$ mkdir catkin_ws_repos # assuming you want to enter a new catkin directory
+$ cd catkin_ws_repos # alternatively just cd your normal catkin workspace
+$ catkin_make 
+$ source devel/setup.bash
+$ mkdir src # assuming this folder does not exist
+$ cd src/
+$ git clone git@github.com:ethz-asl/StructuralInspectionPlanner.git
+$ cd ..
+$ catkin_make
+```
 
 The build process should then be executed and successfully complete. Subsequently open two separate shells and run the following two commands to execute the baseline demo of the algorithm:
 
