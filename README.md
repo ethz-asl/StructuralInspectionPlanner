@@ -5,7 +5,16 @@ A new structural inspection path planning algorithm presented in our paper contr
 
 Installing the toolbox
 ---------------------------
-To use the toolbox a recent ROS installation with catkin support is required. A baseline example on how to get and install is the following:
+To use the toolbox a recent ROS installation with catkin support and the following extra packages is required:
+
+```
+libeigen3-dev
+ros-indigo-tf
+ros-indigo-octomap
+ros-indigo-octomap-msgs
+```
+
+A baseline example on how to get and install is the following:
 
 ```sh
 $ mkdir catkin_ws_repos # assuming you want to enter a new catkin directory
