@@ -68,6 +68,7 @@ References:
 1. A. Bircher, K. Alexis, M. Burri, P. Oettershagen, S. Omari, T. Mantel and R. Siegwart, “Structural inspection path planning via iterative viewpoint resampling with application to aerial robotics,” in Robotics and Automation (ICRA), 2014 IEEE International Conference on, May 2015, (accepted).
 
 This toolbox also relies on the contributions described in the following papers:
+
 2. K. Helsguan, "An effective implementation of the lin-kernighan traveling salesman heuristic", European Journal of Operational Research, vol. 126, no. 1, pp. 106-130, 2000.
 3. H.J. Ferreau and A. Potschka and C. Kirches, "qpOASES"
 4. S. Karaman and E. Frazzoli, "Sampling-based algorithms for optimal motion planning", International Journal of Robotics Research", vol. 30, no. 7, pp. 846-894, 2011
