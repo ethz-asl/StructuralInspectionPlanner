@@ -21,8 +21,14 @@ $ catkin_make
 
 The build process should then be executed and successfully complete. Subsequently open two separate shells and run the following two commands to execute the baseline demo of the algorithm:
 
+Shell #1
+```sh
 roslaunch koptplanner kopt.launch
+```
+Shell #2
+```sh
 rosrun request request 
+```
 
 Detailed Documentation
 ---------------------------
