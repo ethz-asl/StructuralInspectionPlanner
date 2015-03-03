@@ -828,7 +828,7 @@ int cplusplus_callback_function(int ID, int ID2)
     if(!bCollision)
     {
 #ifndef USE_FIXEDWING_MODEL
-      return (long) std::min((double)INT_MAX,std::max((((double)(distLazy * SCALE + 0.5))/g_speed), ANGABS(VP[ID][3]-VP[ID2][3])/g_maxAngularSpeed));
+      return (long) std::min((double)INT_MAX,std::max(distLazy/g_speed, ANGABS(VP[ID][3]-VP[ID2][3])/g_maxAngularSpeed) * SCALE);
 #else
       return (long) std::min((double)INT_MAX,(((double)(distLazy * SCALE + 0.5))/g_speed));
 #endif

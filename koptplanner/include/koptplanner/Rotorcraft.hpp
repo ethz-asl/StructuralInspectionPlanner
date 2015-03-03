@@ -387,7 +387,6 @@ Vector_t Rotorcraft::Triangle<System_t, State_t, Vector_t, region_t>::dualBarrie
         if(fabs(dpsi2)>M_PI)
           dpsi2 = 2*M_PI-fabs(dpsi2);
         c = pow(dpsi1,2.0)/dp+pow(dpsi2, 2.0)/ds;
-        c*=5e2;
       }
       if(c<=costOrientation && this->isVisible(s))
       {
