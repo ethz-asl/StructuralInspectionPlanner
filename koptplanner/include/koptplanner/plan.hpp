@@ -7,8 +7,8 @@
 #define _PLAN_HPP_
 
 #include <eigen3/Eigen/Dense>
-
-// define only one model
+// To chose the used model (rotorcraft or fixed-wing) make
+// the corresponding definition. Define only one model.
 #define USE_ROTORCRAFT_MODEL
 //#define USE_FIXEDWING_MODEL
 
