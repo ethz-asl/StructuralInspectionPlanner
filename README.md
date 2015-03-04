@@ -11,6 +11,7 @@ To use the toolbox a ROS indigo installation with catkin set-up and the followin
 ```
 libeigen3-dev
 ros-indigo-tf
+ros-indigo-rviz
 ros-indigo-octomap
 ros-indigo-octomap-msgs
 ```
