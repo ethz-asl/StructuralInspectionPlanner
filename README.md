@@ -49,7 +49,7 @@ Detailed documentation may be found at the [Wiki!](https://github.com/ethz-asl/S
 
 References:
 ---------------------------
-1. A. Bircher, K. Alexis, M. Burri, P. Oettershagen, S. Omari, T. Mantel and R. Siegwart, “Structural inspection path planning via iterative viewpoint resampling with application to aerial robotics,” in Robotics and Automation (ICRA), 2014 IEEE International Conference on, May 2015, (accepted).
+1. A. Bircher, K. Alexis, M. Burri, P. Oettershagen, S. Omari, T. Mantel and R. Siegwart, “Structural inspection path planning via iterative viewpoint resampling with application to aerial robotics,” in Robotics and Automation (ICRA), 2015 IEEE International Conference on, May 2015, (accepted).
 2. K. Helsguan, "An effective implementation of the lin-kernighan traveling salesman heuristic", European Journal of Operational Research, vol. 126, no. 1, pp. 106-130, 2000.
 3. H.J. Ferreau and A. Potschka and C. Kirches, "qpOASES"
 4. S. Karaman and E. Frazzoli, "Sampling-based algorithms for optimal motion planning", International Journal of Robotics Research", vol. 30, no. 7, pp. 846-894, 2011
@@ -58,7 +58,7 @@ If you use this software in a scientific publication, please cite the following 
 ```
 @INPROCEEDINGS{bircher15inspection, 
 author = "{A. Bircher, K. Alexis, M. Burri, P. Oettershagen, S. Omari, T. Mantel and R. Siegwart}",
-booktitle = {Robotics and Automation (ICRA), 2014 IEEE International Conference on}, 
+booktitle = {Robotics and Automation (ICRA), 2015 IEEE International Conference on}, 
 title={Structural Inspection Path Planning via Iterative Viewpoint Resampling with Application to Aerial Robotics},
 year={2015}, 
 month={May}, 

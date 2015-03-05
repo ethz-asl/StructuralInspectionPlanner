@@ -98,56 +98,6 @@ int main(int argc, char **argv)
     r.sleep();
   }
 
-  /* define obstacle regions as cuboids that are coordinate system aligned */
-  /*
-  shape_msgs::SolidPrimitive body;
-  body.type = shape_msgs::SolidPrimitive::BOX;
-  body.dimensions.push_back(40.0);
-  body.dimensions.push_back(50.0);
-  body.dimensions.push_back(4.0);
-  srv.request.obstacles.push_back(body);
-  geometry_msgs::Pose pose;
-  pose.position.x = 600.0;
-  pose.position.y = 600.0;
-  pose.position.z = 200.0;
-  pose.orientation.x = 0.0;
-  pose.orientation.y = 0.0;
-  pose.orientation.z = 0.0;
-  pose.orientation.w = 1.0;
-  srv.request.obstaclesPoses.push_back(pose);
-  srv.request.obstacleIntransparancy.push_back(0);
-
-  // publish obstacles for rviz 
-  visualization_msgs::Marker marker;
-  marker.header.frame_id = "/kopt_frame";
-  marker.header.stamp = ros::Time::now();
-  marker.ns = "obstacles";
-  marker.id = 0; // enumerate when adding more obstacles
-  marker.type = visualization_msgs::Marker::CUBE;
-  marker.action = visualization_msgs::Marker::ADD;
-
-  marker.pose.position.x = pose.position.x;
-  marker.pose.position.y = pose.position.y;
-  marker.pose.position.z = pose.position.z;
-  marker.pose.orientation.x = pose.orientation.x;
-  marker.pose.orientation.y = pose.orientation.y;
-  marker.pose.orientation.z = pose.orientation.z;
-  marker.pose.orientation.w = pose.orientation.w;
-
-  marker.scale.x = body.dimensions[0];
-  marker.scale.y = body.dimensions[1];
-  marker.scale.z = body.dimensions[2];
-
-  marker.color.r = 0.0f;
-  marker.color.g = 0.0f;
-  marker.color.b = 1.0f;
-  marker.color.a = 0.5;
-
-  marker.lifetime = ros::Duration();
-  obstacle_pub.publish(marker);
-  r.sleep();
-  */
-
   if (client.call(srv))
   {
     /* writing results of scenario to m-file. use supplied script to visualize */
