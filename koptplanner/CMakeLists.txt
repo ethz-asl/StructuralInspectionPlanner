@@ -8,17 +8,14 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   roslib
-  #rviz
   std_msgs
   nav_msgs
   geometry_msgs
   shape_msgs
   message_generation
-#  planner_rrtstar
   optec
 )
 
-#find_package(planner_rrtstar REQUIRED)
 find_package(cmake_modules REQUIRED)
 find_package(optec REQUIRED)
 find_package(Eigen REQUIRED)
@@ -38,7 +35,7 @@ add_service_files(
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
-  std_msgs  # Or other packages containing msgs
+  std_msgs
   nav_msgs
   geometry_msgs
   shape_msgs
