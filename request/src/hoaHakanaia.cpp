@@ -46,7 +46,7 @@ int main(int argc, char **argv)
   srv.request.spaceCenter.push_back(5.0);
   geometry_msgs::Pose reqPose;
 
-  /* starting pose (comment the push_back if no explicit starting pose is desired) */
+  /* starting pose */
   reqPose.position.x = 15.0;
   reqPose.position.y = 15.0;
   reqPose.position.z = -8.0;

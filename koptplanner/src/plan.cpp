@@ -57,7 +57,6 @@ StateVector * VP;
 
 ros::Publisher marker_pub;
 ros::Publisher viewpoint_pub;
-ros::Publisher RRTs_pub;
 koptplanner::inspection::Response* res_g;
 double ** lookupTable;
 double g_speed;
@@ -170,7 +169,7 @@ bool plan(koptplanner::inspection::Request  &req,
   ros::param::get("~/algorithm/lazy_obstacle_check", g_lazy_obstacle_check);
   ros::param::get("~/algorithm/security_distance", g_security_distance);
   
-  g_scale = g_speed*(1.0e5)/sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1])+SQ(req.spaceSize[2]));
+  g_scale = g_speed*1.0e5/sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1])+SQ(req.spaceSize[2]));
   
   if(lookupTable)
   {
@@ -700,7 +699,6 @@ int main(int argc, char **argv)
 
   marker_pub = n.advertise<nav_msgs::Path>("visualization_marker", 1);
   viewpoint_pub = n.advertise<visualization_msgs::Marker>("viewpoint_marker", 1);
-  RRTs_pub = n.advertise<nav_msgs::Path>("RRTs_marker", 1);
 
   ros::ServiceServer service = n.advertiseService("inspectionPath", plan);
   ROS_INFO("Service started");
