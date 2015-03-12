@@ -52,6 +52,9 @@ extern int maxID;
 extern reg_t problemBoundary;
 extern StateVector * VP;
 
+extern double g_scale;
+extern double g_speed;
+extern double g_maxAngularSpeed;
 extern double g_cost;
 extern string g_tourlength;
 extern double g_rrt_scope;
@@ -577,9 +580,6 @@ int cplusplus_callback_publish(int* Tour, int Dim, GainType Cost)
 {
   std::vector<int> T;
   int q = 0;
-#ifdef __ATSP__
-  Dim /=2;
-#endif
   while(q<Dim && Tour[q] != 1)
     q++;
   for(int l = 0; l<q; l++)
@@ -611,12 +611,20 @@ int cplusplus_callback_publish(int* Tour, int Dim, GainType Cost)
   std::vector<int>::iterator itT;
   for(itT = T.begin(); itT != T.end()-1 && *itT != *(itT+1); itT++) {}
   T.erase(itT);
+    
+#ifdef __ATSP__
+  Dim /=2;
+  T.erase(T.end()-1);
+#endif
+
   if(Tour)
     PTPPlanner::Tour_ = T;
-  if(g_cost > ((double)(int)Cost)/((double)SCALE))
+  
+  double cost_new = ((double)(int)Cost)/((double)g_scale);
+  if(g_cost > cost_new)
   {
-    ROS_INFO("New tour cost = %2.2f", ((double)(int)Cost)/((double)SCALE));
-    g_cost = ((double)(int)Cost)/((double)SCALE);
+    ROS_INFO("New tour cost = %2.2f", cost_new);
+    g_cost = cost_new;;
   }
   else
   {
@@ -630,7 +638,7 @@ int cplusplus_callback_publish(int* Tour, int Dim, GainType Cost)
     timeval time;
     gettimeofday(&time, NULL);
     long millisec = time.tv_sec * 1000 + time.tv_usec / 1000;
-    file << ((double)(int)Cost)/((double)SCALE) << ", " << millisec - time_start << ";\n";
+    file << ((double)(int)Cost)/((double)g_scale) << ", " << millisec - time_start << ";\n";
     file.close();
   }
   else
@@ -639,7 +647,7 @@ int cplusplus_callback_publish(int* Tour, int Dim, GainType Cost)
   }
   int k = 0;
   bool directionReverse = T[1] == Dim;
-  for(int i = ((T[1] == Dim && !g_closed_tour) ? 1 : 0); i<T.size() - ((T.back() == Dim && !g_closed_tour) ? 1 : 0); i++)
+  for(int i = ((T[1] == Dim && !g_closed_tour) ? 1 : 0); i<T.size() - ((T[T.size()-1] == Dim && !g_closed_tour) ? 1 : 0); i++)
   {
     std::vector<std::vector<float> > path;
     if(!(i<T.size()-1))
@@ -828,9 +836,9 @@ int cplusplus_callback_function(int ID, int ID2)
     if(!bCollision)
     {
 #ifndef USE_FIXEDWING_MODEL
-      return (long) std::min((double)INT_MAX,std::max(distLazy/g_speed, ANGABS(VP[ID][3]-VP[ID2][3])/g_maxAngularSpeed) * SCALE);
+      return (int) std::min((double)INT_MAX-1,std::max(distLazy/g_speed, ANGABS(VP[ID][3]-VP[ID2][3])/g_maxAngularSpeed) * g_scale);
 #else
-      return (long) std::min((double)INT_MAX,(((double)(distLazy * SCALE + 0.5))/g_speed));
+      return (int) std::min((double)INT_MAX-1,(((double)(distLazy * g_scale))/g_speed + 0.5));
 #endif
     }
   }
@@ -838,7 +846,7 @@ int cplusplus_callback_function(int ID, int ID2)
   state.setNumDimensions(DIMENSIONALITY);
   for(int j = 0; j<DIMENSIONALITY; j++)
     state[j] = VP[ID2][j];
-  ret = (long)std::min((double)INT_MAX,(plannerArray[ID]->rrts_.evalDist(state)*SCALE+0.5)); // distance
+  ret = (int)std::min((double)INT_MAX-1,(plannerArray[ID]->rrts_.evalDist(state)*g_scale+0.5)); // distance
 #ifdef __TIMING_INFO__
   gettimeofday(&time, NULL);
   time_LKH -= time.tv_sec * 1000000 + time.tv_usec;

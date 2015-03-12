@@ -18,8 +18,6 @@
 
 ////////////////////////////////////////////////////////
 
-#define SCALE 100
-
 #define ANGABS(x) (fabs(x)>M_PI?2*M_PI-fabs(x):fabs(x))
 #define LOOKUPTABLE_SIZE 50
 

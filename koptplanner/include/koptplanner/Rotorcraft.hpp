@@ -33,8 +33,6 @@
  extern long time_LKH;
 #endif
 
-extern double g_speed;
-extern double g_maxAngularSpeed;
 extern double g_camAngleHorizontal;
 extern double g_camAngleVertical;
 extern double g_camPitch;
@@ -653,7 +651,7 @@ double Rotorcraft::System<Trajectory_t, State_t, region_t>::evaluateExtensionCos
     double distCurr = stateTowardsIn.x[i] - stateFromIn.x[i];
     distTotal += distCurr*distCurr;
   }
-  return distTotal/SCALE;
+  return distTotal;
 }
 
 template<class System_t, class State_t, class Vector_t, class region_t>

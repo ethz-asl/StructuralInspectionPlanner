@@ -67,6 +67,7 @@ double g_camAngleVertical;
 double g_camPitch;
 double g_maxClimbSinkRate;
 
+double g_scale;
 double g_rrt_scope;
 int g_rrt_it;
 int g_rrt_it_init;
@@ -129,14 +130,14 @@ bool plan(koptplanner::inspection::Request  &req,
   g_rrt_it = 100;
   g_rrt_it_init = 0;
   g_max_obstacle_depth = 3;
-  g_discretization_step = 5.0e-3*sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1]));
+  g_discretization_step = 1.0e-2*sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1]));
   g_angular_discretization_step = 0.2;
-  g_const_A = 1000.0;
+  g_const_A = 1.0e6;
   g_const_B = 3.0;
   g_const_C = 1.0e12;
-  g_const_D = 3000.0;
+  g_const_D = 1.0;
   g_lazy_obstacle_check = false;
-  g_security_distance = 0;//sys_t::r_min;
+  g_security_distance = sys_t::r_min;
 #elif defined USE_ROTORCRAFT_MODEL
   double vp_tol = 2.0e-6*sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1])+SQ(req.spaceSize[2]));
   g_rrt_scope = 0.25*sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1])+SQ(req.spaceSize[2]));
@@ -168,6 +169,8 @@ bool plan(koptplanner::inspection::Request  &req,
   ros::param::get("~/algorithm/const_D", g_const_D);
   ros::param::get("~/algorithm/lazy_obstacle_check", g_lazy_obstacle_check);
   ros::param::get("~/algorithm/security_distance", g_security_distance);
+  
+  g_scale = g_speed*(1.0e5)/sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1])+SQ(req.spaceSize[2]));
   
   if(lookupTable)
   {
@@ -226,11 +229,7 @@ bool plan(koptplanner::inspection::Request  &req,
   res_g = &res;
 
   g_max_obs_dim = 0;
-  if(req.requiredPoses.size() == 1)
-    g_closed_tour = true;
-  else if(req.requiredPoses.size() >= 2)
-    g_closed_tour = false;
-  else
+  if(req.requiredPoses.size() < 1)
   {
     ROS_ERROR("No start position defined! This is required.");
     std::string pkgPath = ros::package::getPath("koptplanner");
@@ -249,13 +248,14 @@ bool plan(koptplanner::inspection::Request  &req,
   long millisecStart = time.tv_sec * 1000 + time.tv_usec / 1000;
   time_start = millisecStart;
   ros::Rate visualizerRate(1000);
+  bool endPoint = false;
 
   tri_t::setCamBoundNormals();
   std::vector<tri_t*> tri;
   tri_t::setParam(req.incidenceAngle, req.minDist, req.maxDist); // incidence angle from surface plane
   
   /* startpoint and further strictly required positions */
-  for(std::vector<geometry_msgs::Pose>::iterator itFixedPoses = req.requiredPoses.begin(); itFixedPoses != req.requiredPoses.end() && itFixedPoses != req.requiredPoses.end()-1; itFixedPoses++)
+  for(std::vector<geometry_msgs::Pose>::iterator itFixedPoses = req.requiredPoses.begin(); itFixedPoses != req.requiredPoses.end() && (itFixedPoses != req.requiredPoses.end()-1 || req.requiredPoses.size()==1); itFixedPoses++)
   {
     tri_t * tmp = new tri_t;
     tmp->x1[0] = itFixedPoses->position.x;
@@ -346,8 +346,20 @@ bool plan(koptplanner::inspection::Request  &req,
     }
   }
   /* end point */
-  if(req.requiredPoses.size()>0)
+  if(req.requiredPoses.size()>1 && // selecting the same start and end point causes the LKH to fail
+      ((req.requiredPoses.end()-1)->position.x != req.requiredPoses[0].position.x ||
+      (req.requiredPoses.end()-1)->position.y != req.requiredPoses[0].position.y ||
+      (req.requiredPoses.end()-1)->position.z != req.requiredPoses[0].position.z ||
+#ifdef USE_ROTORCRAFT_MODEL
+      (req.requiredPoses.end()-1)->orientation.z != req.requiredPoses[0].orientation.z))
+#elif defined USE_FIXEDWING_MODEL
+      (req.requiredPoses.end()-1)->orientation.x != req.requiredPoses[0].orientation.x ||
+      (req.requiredPoses.end()-1)->orientation.y != req.requiredPoses[0].orientation.y ||
+      (req.requiredPoses.end()-1)->orientation.z != req.requiredPoses[0].orientation.z))
+#endif
   {
+    g_closed_tour = false;
+    endPoint = true;
     tri_t * tmp = new tri_t;
     tmp->x1[0] = (req.requiredPoses.end()-1)->position.x;
     tmp->x1[1] = (req.requiredPoses.end()-1)->position.y;
@@ -549,9 +561,9 @@ bool plan(koptplanner::inspection::Request  &req,
     for(int i = 0; i<maxID; i++)
     {
       vals[i] = new double[3];
-      vals[i][0] = VP[i][0]*SCALE;
-      vals[i][1] = VP[i][1]*SCALE;
-      vals[i][2] = VP[i][2]*SCALE;
+      vals[i][0] = VP[i][0]*g_scale;
+      vals[i][1] = VP[i][1]*g_scale;
+      vals[i][2] = VP[i][2]*g_scale;
     }
     /* use provided interface of the TSP solver */
     std::string params = "MOVE_TYPE=5\n";
@@ -575,7 +587,7 @@ bool plan(koptplanner::inspection::Request  &req,
 #endif
     std::stringstream ss; ss<<maxID;
     prob += "DIMENSION:"+ss.str()+"\n";
-    if(req.requiredPoses.size()>1)
+    if(endPoint)
       prob += "FIXED_EDGES_SECTION\n"+ss.str()+" 1\n-1\n";
     prob += "NODE_COORD_SECTION\n";
     prob += "EOF";
@@ -691,7 +703,7 @@ int main(int argc, char **argv)
   RRTs_pub = n.advertise<nav_msgs::Path>("RRTs_marker", 1);
 
   ros::ServiceServer service = n.advertiseService("inspectionPath", plan);
-  ROS_INFO("Calculating");
+  ROS_INFO("Service started");
   ros::spin();
 
   return 0;

@@ -38,17 +38,17 @@ int main(int argc, char **argv)
 
   /* define the bounding box */
   koptplanner::inspection srv;
-  srv.request.spaceSize.push_back(1250);
+  srv.request.spaceSize.push_back(1375);
   srv.request.spaceSize.push_back(2165);
   srv.request.spaceSize.push_back(0.001);
-  srv.request.spaceCenter.push_back(1250.0/2.0);
+  srv.request.spaceCenter.push_back(1375.0/2.0);
   srv.request.spaceCenter.push_back(2165.0/2.0);
   srv.request.spaceCenter.push_back(200.0);
   geometry_msgs::Pose reqPose;
 
   /* starting pose (comment the push_back if no explicit starting pose is desired) */
-  reqPose.position.x = 200.0;
-  reqPose.position.y = 200.0;
+  reqPose.position.x = 300.0;
+  reqPose.position.y = 300.0;
   reqPose.position.z = 200.0;
   tf::Quaternion q = tf::createQuaternionFromRPY(0.0, 0.0, 0.0);
   reqPose.orientation.x = q.x();
@@ -57,10 +57,10 @@ int main(int argc, char **argv)
   reqPose.orientation.w = q.w();
   srv.request.requiredPoses.push_back(reqPose);
 
-  /* final pose (comment the push_back if no explicit final pose is desired, the segment between final pose and starting pose has to be removed manually from the path in this version) */
-  reqPose.position.x = 200.0;
-  reqPose.position.y = 200.0;
-  reqPose.position.z = 200;
+  /* final pose (remove if no explicit final pose is desired) */
+  reqPose.position.x = 400.0;
+  reqPose.position.y = 300.0;
+  reqPose.position.z = 200.0;
   q = tf::createQuaternionFromRPY(0.0, 0.0, 0.0);
   reqPose.orientation.x = q.x();
   reqPose.orientation.y = q.y();
@@ -70,8 +70,8 @@ int main(int argc, char **argv)
 
   /* parameters for the path calculation (such as may change during mission) */
   srv.request.incidenceAngle = M_PI/6.0;
-  srv.request.minDist = 100.0;
-  srv.request.maxDist = 5000.0;
+  srv.request.minDist = 40.0;
+  srv.request.maxDist = 300.0;
   srv.request.numIterations = 20;
 
   /* read STL file and publish to rviz */

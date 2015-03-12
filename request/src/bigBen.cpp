@@ -57,7 +57,7 @@ int main(int argc, char **argv)
   reqPose.orientation.w = q.w();
   srv.request.requiredPoses.push_back(reqPose);
 
-  /* final pose (comment the push_back if no explicit final pose is desired, the segment between final pose and starting pose has to be removed manually from the path in this version) */
+  /* final pose (remove if no explicit final pose is desired) */
   reqPose.position.x = 25.0;
   reqPose.position.y = 25.0;
   reqPose.position.z = -55;
