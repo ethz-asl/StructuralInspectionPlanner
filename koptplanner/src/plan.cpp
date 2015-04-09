@@ -125,7 +125,7 @@ bool plan(koptplanner::inspection::Request  &req,
   /* loading the optional parameters */
 #ifdef USE_FIXEDWING_MODEL
   double vp_tol = 2.0e-6*sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1])+SQ(req.spaceSize[2]));
-  g_rrt_scope = 0.5*sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1])+SQ(req.spaceSize[2]));
+  g_rrt_scope = 0.25*sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1])+SQ(req.spaceSize[2]));
   g_rrt_it = 100;
   g_rrt_it_init = 0;
   g_max_obstacle_depth = 3;
@@ -139,7 +139,7 @@ bool plan(koptplanner::inspection::Request  &req,
   g_security_distance = sys_t::r_min;
 #elif defined USE_ROTORCRAFT_MODEL
   double vp_tol = 2.0e-6*sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1])+SQ(req.spaceSize[2]));
-  g_rrt_scope = 0.25*sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1])+SQ(req.spaceSize[2]));
+  g_rrt_scope = 0.125*sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1])+SQ(req.spaceSize[2]));
   g_rrt_it = 50;
   g_rrt_it_init = 0;
   g_max_obstacle_depth = 3;
