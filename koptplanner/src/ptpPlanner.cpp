@@ -800,13 +800,13 @@ int cplusplus_callback_function(int ID, int ID2)
     plannerArrayBool = true;
     StateVector tmp = VP[0];
     plannerArray[0] = new PTPPlanner();
-    plannerArray[0]->initialize(tmp,tmp[0],tmp[1],tmp[2],g_rrt_scope,g_rrt_scope,g_rrt_scope);
+    plannerArray[0]->initialize(tmp,tmp[0],tmp[1],tmp[2],2.0*g_rrt_scope,2.0*g_rrt_scope,2.0*g_rrt_scope);
   }
   if(!plannerArray[ID]) // init
   {
     plannerArray[ID] = new PTPPlanner();
     StateVector tmp = VP[ID];
-    plannerArray[ID]->initialize(tmp,tmp[0],tmp[1],tmp[2],g_rrt_scope,g_rrt_scope,g_rrt_scope);
+    plannerArray[ID]->initialize(tmp,tmp[0],tmp[1],tmp[2],2.0*g_rrt_scope,2.0*g_rrt_scope,2.0*g_rrt_scope);
     reinitRRTs[ID] = 0;
   }
   double distLazy = sqrt( pow(VP[ID][0] - VP[ID2][0],2.0) + pow(VP[ID][1] - VP[ID2][1],2.0) + pow(VP[ID][2] - VP[ID2][2],2.0) );
