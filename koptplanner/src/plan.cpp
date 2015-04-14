@@ -185,7 +185,7 @@ bool plan(koptplanner::inspection::Request  &req,
   /* preparing log file */
   std::fstream plannerLog;
   plannerLog.open((pkgPath+"/data/report.log").c_str(), std::ios::out);
-  plannerLog << "Inspection path planner version 0.0.0\nScenario:\n";
+  plannerLog << "Inspection path planner version 1.0.0\nScenario:\n";
   plannerLog << "Number of facets:\t" << req.inspectionArea.size() << "\n";
   plannerLog << "Number of obstacles:\t" << req.obstacles.size() << "\n";
   plannerLog << "Space center:\t\t(" << req.spaceCenter[0] << ", " << req.spaceCenter[1] << ", " << req.spaceCenter[2] << ")\n";
