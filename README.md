@@ -41,6 +41,22 @@ Shell #2
 rosrun request request 
 ```
 
+For visualization puprposes, a 3rd terminal has to be launched: 
+
+Shell #3
+```sh
+rosrun rviz rviz
+```
+
+Add the necessary displays:
+
+```sh
+$ ‘Path’ on topic ‘visualization_marker’
+$ ‘Marker’ on topic ‘viewpoint_marker’
+$ ‘Path’ on topic ‘stl_mesh’
+$ ‘Marker’ on topic ‘scenario’
+```
+To display the progress, chose ‘/kopt_frame’ as fixed frame or publish a suitable transform.
 
 Detailed Documentation
 ---------------------------
