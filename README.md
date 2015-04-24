@@ -51,10 +51,10 @@ rosrun rviz rviz
 Add the necessary displays:
 
 ```sh
-$ ‘Path’ on topic ‘visualization_marker’
-$ ‘Marker’ on topic ‘viewpoint_marker’
-$ ‘Path’ on topic ‘stl_mesh’
-$ ‘Marker’ on topic ‘scenario’
+‘Path’ on topic ‘visualization_marker’
+‘Marker’ on topic ‘viewpoint_marker’
+‘Path’ on topic ‘stl_mesh’
+‘Marker’ on topic ‘scenario’
 ```
 To display the progress, chose ‘/kopt_frame’ as fixed frame or publish a suitable transform.
 
