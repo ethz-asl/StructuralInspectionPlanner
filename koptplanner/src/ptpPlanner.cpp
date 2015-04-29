@@ -44,10 +44,9 @@ PTPPlanner** plannerArray;
 bool plannerArrayBool;
 
 extern ros::Publisher marker_pub;
-extern ros::Publisher RRTs_pub;
 extern ros::Publisher viewpoint_pub;
 extern koptplanner::inspection::Response* res_g;
-extern int* reinitRRTs;
+extern int * reinitRRTs;
 extern int maxID;
 extern reg_t problemBoundary;
 extern StateVector * VP;

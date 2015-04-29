@@ -38,7 +38,6 @@ extern double g_camAngleVertical;
 extern double g_camPitch;
 extern MDL_NAMESPACE::region problemBoundary;
 extern koptError_t koptError;
-extern ros::Publisher constraints_pub;
 extern double g_const_D;
 extern int g_max_obstacle_depth;
 extern double g_discretization_step;
