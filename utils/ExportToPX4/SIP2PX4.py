@@ -15,14 +15,13 @@
 #
 
 import math
+import sys, getopt
 import numpy as np
 from math import pow, cos, sin, sqrt, degrees, radians, atan2, pi
 from scipy import cos, sin, arctan, sqrt, arctan2
 
 # 	Change based on your files and LLA ENU Origin
-px4_mission_file = open("Mission_PX4.txt", "w")
 LLA_ENU_Point = np.array([47.135388888888890, 8.688611111111111, 919.5254262437646] )
-PathENU = np.genfromtxt('ExamplePath.csv', delimiter = ',')
 
 # 	Acceptance Radius and Auto flag (PX4-mission related)
 AcceptanceRadius = 50 # radius to consider that the UAV crossed the waypoint
@@ -116,7 +115,28 @@ def enu2lla(LonLatAlt_orig, enu):
 
 
 
-def main():
+def main(argv):
+
+	inputfile = ''
+	outputfile = ''
+	try:
+		opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
+	except getopt.GetoptError:
+		print 'test.py -i <inputfile> -o <outputfile>'
+		sys.exit(2)
+	for opt, arg in opts:
+		if opt == '-h':
+			print 'test.py -i <inputfile> -o <outputfile>'
+			sys.exit()
+		elif opt in ("-i", "--ifile"):
+			inputfile = arg
+		elif opt in ("-o", "--ofile"):
+			outputfile = arg
+	
+	global px4_mission_file
+	px4_mission_file = open(outputfile, "w")
+	global PathENU
+	PathENU = np.genfromtxt(inputfile, delimiter = ',')
 
 	Nx,Ny = PathENU.shape
 
@@ -146,4 +166,4 @@ def main():
 	px4_mission_file.close()
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
