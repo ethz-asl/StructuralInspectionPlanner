@@ -731,17 +731,16 @@ int cplusplus_callback_publish(int* Tour, int Dim, GainType Cost)
   marker_pub.publish(res_g->inspectionPath);
   std::fstream f;
   std::string pathAssemb = ros::package::getPath("koptplanner");
-  pathAssemb += "/data/latestPath.m";
+  pathAssemb += "/data/latestPath.csv";
   f.open(pathAssemb.c_str(), std::ios::out);
   if(!f.is_open())
     ROS_ERROR("path not found");
-  f << "pathKopt = [";
+  f << "";
   for(std::vector<geometry_msgs::PoseStamped>::iterator it = res_g->inspectionPath.poses.begin(); it != res_g->inspectionPath.poses.end()-1; it++)
   {
     double dist = pow(it->pose.position.x - (it+1)->pose.position.x,2)+pow(it->pose.position.y - (it+1)->pose.position.y,2)+pow(it->pose.position.z - (it+1)->pose.position.z,2);
     dist = sqrt(dist);
     double mps = 1000;
-    ros::Rate r(1*mps/dist);
     for(int i = 0; i<1; i++)
     {
       visualization_msgs::Marker point;
@@ -756,10 +755,9 @@ int cplusplus_callback_publish(int* Tour, int Dim, GainType Cost)
       tf::Pose pose;
       tf::poseMsgToTF(point.pose, pose);
       double yaw_angle = tf::getYaw(pose.getRotation());
-      f << point.pose.position.x << ", " << point.pose.position.y << ", " << point.pose.position.z << ", " << yaw_angle << ";\n";
+      f << point.pose.position.x << "," << point.pose.position.y << "," << point.pose.position.z << ",0,0," << yaw_angle << "\n";
     }
   }
-  f<<"];\n";
   f.close();
   return 1;
 }
