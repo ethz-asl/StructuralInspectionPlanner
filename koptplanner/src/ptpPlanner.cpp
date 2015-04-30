@@ -731,7 +731,7 @@ int cplusplus_callback_publish(int* Tour, int Dim, GainType Cost)
   marker_pub.publish(res_g->inspectionPath);
   std::fstream f;
   std::string pathAssemb = ros::package::getPath("koptplanner");
-  pathAssemb += "/data/latestPath.txt";
+  pathAssemb += "/data/latestPath.csv";
   f.open(pathAssemb.c_str(), std::ios::out);
   if(!f.is_open())
     ROS_ERROR("path not found");
