@@ -1,6 +1,6 @@
 # StructuralInspectionPlanner Utilities
 
-This section contains useful utilities that help interfacing the paths computed by this toolbox with widely used autopilots or other software. It will be constantly updated.
+This section contains a set of useful utilities that can help either to interface the planner with widespread autopilots or to work on further developments.
 
 Export to PX4/Pixhawk
 -------
