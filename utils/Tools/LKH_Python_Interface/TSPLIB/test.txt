@@ -1,0 +1,18 @@
+NAME : test.1000.tour
+COMMENT : Length = 1000
+COMMENT : Found by LKH [Keld Helsgaun] Sun May 10 14:58:02 2015
+TYPE : TOUR
+DIMENSION : 10
+TOUR_SECTION
+1
+8
+7
+3
+4
+5
+2
+6
+10
+9
+-1
+EOF

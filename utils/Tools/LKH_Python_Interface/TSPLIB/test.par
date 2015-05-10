@@ -1,0 +1,7 @@
+PROBLEM_FILE = /home/kostas/Dropbox/PrivateGit/Python/Call_LKH/TSPLIB/test.tsp
+OPTIMUM 378032
+MOVE_TYPE = 5
+PATCHING_C = 3
+PATCHING_A = 2
+RUNS = 10
+TOUR_FILE = test.txt

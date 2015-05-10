@@ -17,7 +17,15 @@ import os
 import math
 import numpy as np
 
-CostMatrix = np.ones((5,5))
+# Change with the Cost Matrix of your problem or 
+# consider using it as an argument
+CostMatrix = np.ones((10,10))*100
+
+fname_tsp = "test"
+user_comment = "a comment by the user"
+
+# Change these directories based on where you have 
+# a compiled executable of the LKH TSP Solver
 lkh_dir = '/LKH/LKH-2.0.7/'
 tsplib_dir = '/TSPLIB/'
 lkh_cmd = 'LKH'
@@ -41,10 +49,10 @@ def writeTSPLIBfile_FE(fname_tsp,CostMatrix,user_comment):
 	for i in range(0,dims_tsp):
 		cost_matrix_strline = ''
 		for j in range(0,dims_tsp-1):
-			cost_matrix_strline = cost_matrix_strline + str(CostMatrix[i][j]) + ' '
+			cost_matrix_strline = cost_matrix_strline + str(int(CostMatrix[i][j])) + ' '
 
 		j = dims_tsp-1
-		cost_matrix_strline = cost_matrix_strline + str(CostMatrix[i][j])
+		cost_matrix_strline = cost_matrix_strline + str(int(CostMatrix[i][j]))
 		cost_matrix_strline = cost_matrix_strline + '\n'
 		Cost_Matrix_STRline.append(cost_matrix_strline)
 	
@@ -65,7 +73,7 @@ def writeTSPLIBfile_FE(fname_tsp,CostMatrix,user_comment):
 
 	fileID2 = open((pwd + tsplib_dir + fname_tsp + '.par'), "w")
 
-	problem_file_line = 'PROBLEM_FILE = ' + fname_tsp + '.tsp' + '\n'
+	problem_file_line = 'PROBLEM_FILE = ' + pwd + tsplib_dir + fname_tsp + '.tsp' + '\n' # remove pwd + tsplib_dir
 	optimum_line = 'OPTIMUM 378032' + '\n'
 	move_type_line = 'MOVE_TYPE = 5' + '\n'
 	patching_c_line = 'PATCHING_C = 3' + '\n'
@@ -80,28 +88,24 @@ def writeTSPLIBfile_FE(fname_tsp,CostMatrix,user_comment):
 	fileID2.write(patching_a_line)
 	fileID2.write(runs_line)
 	fileID2.write(tour_file_line)
-
+	fileID2.close()
 	return fileID, fileID2
 
 def copy_toTSPLIBdir_cmd(fname_basis):
-	copy_toTSPLIBdir_cmd = 'cp' + ' ' + pwd + lkh_dir + fname_basis + '.txt' + ' ' +  pwd + tsplib_dir
-	print copy_toTSPLIBdir_cmd
+	copy_toTSPLIBdir_cmd = 'cp' + ' ' + pwd + '/' + fname_basis + '.txt' + ' ' +  pwd + tsplib_dir
 	os.system(copy_toTSPLIBdir_cmd)
 
 def run_LKHsolver_cmd(fname_basis):
-	run_lkh_cmd = pwd + lkh_dir  + lkh_cmd + ' ' + pwd + tsplib_dir + fname_basis + '.par'
-	print run_lkh_cmd
+	run_lkh_cmd =  pwd + lkh_dir  + lkh_cmd + ' ' + pwd + tsplib_dir + fname_basis + '.par'
 	os.system(run_lkh_cmd)
 
 def rm_solution_file_cmd(fname_basis):
-	rm_sol_cmd = 'rm' + ' ' + pwd + lkh_dir + fname_basis + '.txt'
+	rm_sol_cmd = 'rm' + ' ' + pwd + '/' + fname_basis + '.txt'
 	os.system(rm_sol_cmd) 
 
 
 def main(): 
-	fname_tsp = "test"
-	user_comment = "no comment"
-
+	
 	[fileID1,fileID2] = writeTSPLIBfile_FE(fname_tsp,CostMatrix,user_comment)
 	run_LKHsolver_cmd(fname_tsp)
 	copy_toTSPLIBdir_cmd(fname_tsp)
@@ -110,3 +114,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
