@@ -661,7 +661,7 @@ int cplusplus_callback_publish(int* Tour, int Dim, GainType Cost)
         std::vector<float> tmp;
         for(int l = 0; l<DIMENSIONALITY; l++)
           tmp.push_back(plannerArray[i]->stateVec[l]);
-        path.push_back(tmp);
+        //path.push_back(tmp);
         std::reverse(path.begin(), path.end());
       }
       else
@@ -670,7 +670,7 @@ int cplusplus_callback_publish(int* Tour, int Dim, GainType Cost)
         std::vector<float> tmp;
         for(int l = 0; l<DIMENSIONALITY; l++)
           tmp.push_back(plannerArray[T[0]-1]->stateVec[l]);
-        path.push_back(tmp);
+        //path.push_back(tmp);
       }
     }
     else
@@ -685,7 +685,7 @@ int cplusplus_callback_publish(int* Tour, int Dim, GainType Cost)
         std::vector<float> tmp;
         for(int l = 0; l<DIMENSIONALITY; l++)
           tmp.push_back(plannerArray[0]->stateVec[l]);
-        path.push_back(tmp);
+        //path.push_back(tmp);
         std::reverse(path.begin(), path.end());
       }
       else
@@ -694,9 +694,12 @@ int cplusplus_callback_publish(int* Tour, int Dim, GainType Cost)
         std::vector<float> tmp;
         for(int l = 0; l<DIMENSIONALITY; l++)
           tmp.push_back(plannerArray[T[i+1]-1]->stateVec[l]);
-        path.push_back(tmp);
+        //path.push_back(tmp);
       }
     }
+    ROS_INFO("path1 (%2.2f,%2.2f,%2.2f,%2.2f)",path[0][0],path[0][1],path[0][2],path[0][5]);
+    ROS_INFO("path2 (%2.2f,%2.2f,%2.2f,%2.2f)",path[1][0],path[1][1],path[1][2],path[1][5]);
+    ROS_INFO("path3 (%2.2f,%2.2f,%2.2f,%2.2f)",path[2][0],path[2][1],path[2][2],path[2][5]);
 
     for(std::vector<std::vector<float> >::iterator it = path.begin(); it!=path.end(); it++)
     {
