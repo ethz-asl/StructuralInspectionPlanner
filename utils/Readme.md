@@ -19,7 +19,8 @@ Within *utils/ExportToPX4* a python script called *KML2PX4.py* reads a KML file 
 
 note: set height=-1 to retrieve altitude reference form the KML file
 
-**Export to DJI drones**
+Export to DJI drones
+-------
 
 Within *utils/ExportToDJI* a python script called *SIP2DJI.py* reads a CSV file that contains the results of the StructuralInspectionPlanner and writes a DJI drone mission file. To run the script:
 
