@@ -9,7 +9,7 @@ Export to PX4/Pixhawk
 
 Within *utils/ExportToPX4* a python script called *SIP2PX4.py* reads a CSV file that contains the results of the StructuralInspectionPlanner and writes a PX4/Pixhawk mission file. To run the script:
 
-    $ python SIP2PX4.py -i <inputfile> -o <outputfile>
+    $ python SIP2PX4.py -i <inputfile.csv> -o <outputfile.txt>
 
 **KML Path Export to PX4/Pixhawk**
 
@@ -18,6 +18,12 @@ Within *utils/ExportToPX4* a python script called *KML2PX4.py* reads a KML file 
     $ python KML2PX4.py --file=ExampleKML.kml --output=KMLmissionPX4.txt --radius=30  --auto=1 --sparsify=1 --height=100
 
 note: set height=-1 to retrieve altitude reference form the KML file
+
+**Export to DJI drones**
+
+Within *utils/ExportToDJI* a python script called *SIP2DJI.py* reads a CSV file that contains the results of the StructuralInspectionPlanner and writes a DJI drone mission file. To run the script:
+
+    $ python SIP2DJI.py -i <inputfile.csv> -o <outputfile.awm>
 
 Tools for Development
 -------
