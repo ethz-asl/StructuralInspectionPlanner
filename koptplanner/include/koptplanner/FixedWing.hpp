@@ -952,7 +952,7 @@ int FixedWing::System<Trajectory_t, State_t, region_t>::extendTo (State_t &state
     ang1 -= 2 * M_PI;
   if(ang2>ang_con)
     ang2 -= 2 * M_PI;
-  length = length + r_min * (2 * ang_con - ang1 - ang2);
+  length = sqrt(SQ(length) - 4.0 * SQ(r_min)) + r_min * (2 * ang_con - ang1 - ang2);
 
   // get total length
   if(length < minLength)
@@ -996,7 +996,7 @@ int FixedWing::System<Trajectory_t, State_t, region_t>::extendTo (State_t &state
     ang1 += 2 * M_PI;
   if(ang2<ang_con)
     ang2 += 2 * M_PI;
-  length = length + r_min * (ang1 + ang2 - 2 * ang_con);
+  length = sqrt(SQ(length) - 4.0 * SQ(r_min)) + r_min * (ang1 + ang2 - 2 * ang_con);
 
   // get total length
   if(length < minLength)
