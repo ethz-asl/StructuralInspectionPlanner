@@ -1026,11 +1026,11 @@ int FixedWing::System<Trajectory_t, State_t, region_t>::extendTo (State_t &state
   }
   // vertical displacement
   float dz = stateTowardsIn[2] - stateFromIn[2];
-  int additionalCircles = 0;
+  double additionalCircles = 0.0;
   while(abs(dz/minLength) > g_maxClimbSinkRate)
   {
-    minLength+=r_min*2*M_PI;
-    additionalCircles++;
+    minLength+=r_min*2.0*M_PI;
+    additionalCircles+=1.0;
   }
   float d = stateFromIn[2];
   float c = stateFromIn[4];
@@ -1103,7 +1103,7 @@ int FixedWing::System<Trajectory_t, State_t, region_t>::extendTo (State_t &state
     trajectoryTemp.states_.push_back(sampledState);
   }
   // add additional circles to compensate for height difference
-  for (float t=0.0; t<=additionalCircles; t+=abscissaResolution3)
+  for (float t=0.0001; t<=additionalCircles; t+=abscissaResolution3)
   {
     sampledState[0] = midPoint2XG+r_min*sin(angle2+t*2*M_PI*left2)*left2;
     sampledState[1] = midPoint2YG-r_min*cos(angle2+t*2*M_PI*left2)*left2;
