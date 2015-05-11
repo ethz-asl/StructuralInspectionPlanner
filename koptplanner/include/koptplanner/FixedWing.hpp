@@ -564,7 +564,7 @@ Vector_t FixedWing::Triangle<System_t, State_t, Vector_t, region_t>::dualBarrier
       dp += sqrt(pow((*state1)[0] - g[0],2.0) + pow((*state1)[1] - g[1],2.0) + pow((*state1)[2] - g[2],2.0));
       ds += sqrt(pow((*state2)[0] - g[0],2.0) + pow((*state2)[1] - g[1],2.0) + pow((*state2)[2] - g[2],2.0));
     }
-    for(double psi = 0.0; psi<2.0*M_PI; psi+=g_angular_discretization_step)
+    for(double psi = -M_PI; psi<M_PI; psi+=g_angular_discretization_step)
     {
       StateVector s = g;
       s[3] = 0.0;
@@ -693,7 +693,10 @@ double FixedWing::Triangle<System_t, State_t, Vector_t, region_t>::AvoidObstacle
   for(int i = 0; i<3; i++)
   {
     int nWSR = 100;
-    lb_l[i] = std::max(obs->center[i]+obs->size[i]/2+g_security_distance+System_t::r_min, lb_l[i]);
+    if(i = 2)
+      lb_l[i] = std::max(obs->center[i]+obs->size[i]/2+g_security_distance, lb_l[i]);
+    else
+      lb_l[i] = std::max(obs->center[i]+obs->size[i]/2+g_security_distance+System_t::r_min, lb_l[i]);
     real_t lb_l2[8] = {lb_l[0], lb_l[1], lb_l[2], lb_l[3], lb_l[4], lb_l[5], lb_l[6], lb_l[7]};
     real_t ub_l2[8] = {ub_l[0], ub_l[1], ub_l[2], ub_l[3], ub_l[4], ub_l[5], ub_l[6], ub_l[7]};
     if(SUCCESSFUL_RETURN ==  this->VPSolver->hotstart( this->d,lb_l,ub_l,this->lbA,this->ubA, nWSR ))
@@ -708,7 +711,10 @@ double FixedWing::Triangle<System_t, State_t, Vector_t, region_t>::AvoidObstacle
           lb_l[k] = lb[k];
           ub_l[k] = ub[k];
         }
-        lb_l[i] = std::max(obs->center[i]+obs->size[i]/2+g_security_distance+System_t::r_min, lb_l[i]);
+        if(i = 2)
+          lb_l[i] = std::max(obs->center[i]+obs->size[i]/2+g_security_distance, lb_l[i]);
+        else
+          lb_l[i] = std::max(obs->center[i]+obs->size[i]/2+g_security_distance+System_t::r_min, lb_l[i]);
         gPot[0] = xOpt[0]; gPot[1] = xOpt[1]; gPot[2] = xOpt[2];
         region_t* obsPot = NULL;
         if(obsPot = this->IsInCollision(gPot))
@@ -737,7 +743,10 @@ double FixedWing::Triangle<System_t, State_t, Vector_t, region_t>::AvoidObstacle
   for(int i = 0; i<3; i++)
   {
     int nWSR = 100;
-    ub_l[i] = std::min(obs->center[i]-obs->size[i]/2-g_security_distance-System_t::r_min, ub_l[i]);
+    if(i = 2)
+      ub_l[i] = std::min(obs->center[i]-obs->size[i]/2-g_security_distance, ub_l[i]);
+    else
+      ub_l[i] = std::min(obs->center[i]-obs->size[i]/2-g_security_distance-System_t::r_min, ub_l[i]);
     real_t lb_l2[8] = {lb_l[0], lb_l[1], lb_l[2], lb_l[3], lb_l[4], lb_l[5], lb_l[6], lb_l[7]};
     real_t ub_l2[8] = {ub_l[0], ub_l[1], ub_l[2], ub_l[3], ub_l[4], ub_l[5], ub_l[6], ub_l[7]};
     if(SUCCESSFUL_RETURN == this->VPSolver->hotstart( this->d,lb_l,ub_l,this->lbA,this->ubA, nWSR ))
@@ -752,7 +761,10 @@ double FixedWing::Triangle<System_t, State_t, Vector_t, region_t>::AvoidObstacle
           lb_l[k] = lb[k];
           ub_l[k] = ub[k];
         }
-        ub_l[i] = std::min(obs->center[i]-obs->size[i]/2-g_security_distance-System_t::r_min, ub_l[i]);
+        if(i = 2)
+          ub_l[i] = std::min(obs->center[i]-obs->size[i]/2-g_security_distance, ub_l[i]);
+        else
+          ub_l[i] = std::min(obs->center[i]-obs->size[i]/2-g_security_distance-System_t::r_min, ub_l[i]);
         gPot[0] = xOpt[0]; gPot[1] = xOpt[1]; gPot[2] = xOpt[2];
         region_t* obsPot = NULL;
         if(obsPot = this->IsInCollision(gPot))
@@ -952,7 +964,7 @@ int FixedWing::System<Trajectory_t, State_t, region_t>::extendTo (State_t &state
     ang1 -= 2 * M_PI;
   if(ang2>ang_con)
     ang2 -= 2 * M_PI;
-  length = length + r_min * (2 * ang_con - ang1 - ang2);
+  length = sqrt(SQ(length) - 4.0 * SQ(r_min)) + r_min * (2 * ang_con - ang1 - ang2);
 
   // get total length
   if(length < minLength)
@@ -996,7 +1008,7 @@ int FixedWing::System<Trajectory_t, State_t, region_t>::extendTo (State_t &state
     ang1 += 2 * M_PI;
   if(ang2<ang_con)
     ang2 += 2 * M_PI;
-  length = length + r_min * (ang1 + ang2 - 2 * ang_con);
+  length = sqrt(SQ(length) - 4.0 * SQ(r_min)) + r_min * (ang1 + ang2 - 2 * ang_con);
 
   // get total length
   if(length < minLength)
@@ -1014,11 +1026,11 @@ int FixedWing::System<Trajectory_t, State_t, region_t>::extendTo (State_t &state
   }
   // vertical displacement
   float dz = stateTowardsIn[2] - stateFromIn[2];
-  int additionalCircles = 0;
+  double additionalCircles = 0.0;
   while(abs(dz/minLength) > g_maxClimbSinkRate)
   {
-    minLength+=r_min*2*M_PI;
-    additionalCircles++;
+    minLength+=r_min*2.0*M_PI;
+    additionalCircles+=1.0;
   }
   float d = stateFromIn[2];
   float c = stateFromIn[4];
@@ -1091,7 +1103,7 @@ int FixedWing::System<Trajectory_t, State_t, region_t>::extendTo (State_t &state
     trajectoryTemp.states_.push_back(sampledState);
   }
   // add additional circles to compensate for height difference
-  for (float t=0.0; t<=additionalCircles; t+=abscissaResolution3)
+  for (float t=0.0001; t<=additionalCircles; t+=abscissaResolution3)
   {
     sampledState[0] = midPoint2XG+r_min*sin(angle2+t*2*M_PI*left2)*left2;
     sampledState[1] = midPoint2YG-r_min*cos(angle2+t*2*M_PI*left2)*left2;

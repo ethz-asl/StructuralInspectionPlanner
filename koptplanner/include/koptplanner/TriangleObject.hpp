@@ -112,7 +112,7 @@ region_t* Holonomic::Triangle<System_t, State_t, Vector_t, region_t>::IsInCollis
   {
     if (fabs((*iter)->center[0] - stateIn[0]) < (*iter)->size[0]/2.0 + g_security_distance + rmin &&
         fabs((*iter)->center[1] - stateIn[1]) < (*iter)->size[1]/2.0 + g_security_distance + rmin &&
-        fabs((*iter)->center[2] - stateIn[2]) < (*iter)->size[2]/2.0 + g_security_distance + rmin)
+        fabs((*iter)->center[2] - stateIn[2]) < (*iter)->size[2]/2.0 + g_security_distance)
     {
       return *iter;
     }
