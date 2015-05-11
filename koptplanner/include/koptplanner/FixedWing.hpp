@@ -693,7 +693,10 @@ double FixedWing::Triangle<System_t, State_t, Vector_t, region_t>::AvoidObstacle
   for(int i = 0; i<3; i++)
   {
     int nWSR = 100;
-    lb_l[i] = std::max(obs->center[i]+obs->size[i]/2+g_security_distance+System_t::r_min, lb_l[i]);
+    if(i = 2)
+      lb_l[i] = std::max(obs->center[i]+obs->size[i]/2+g_security_distance, lb_l[i]);
+    else
+      lb_l[i] = std::max(obs->center[i]+obs->size[i]/2+g_security_distance+System_t::r_min, lb_l[i]);
     real_t lb_l2[8] = {lb_l[0], lb_l[1], lb_l[2], lb_l[3], lb_l[4], lb_l[5], lb_l[6], lb_l[7]};
     real_t ub_l2[8] = {ub_l[0], ub_l[1], ub_l[2], ub_l[3], ub_l[4], ub_l[5], ub_l[6], ub_l[7]};
     if(SUCCESSFUL_RETURN ==  this->VPSolver->hotstart( this->d,lb_l,ub_l,this->lbA,this->ubA, nWSR ))
@@ -708,7 +711,10 @@ double FixedWing::Triangle<System_t, State_t, Vector_t, region_t>::AvoidObstacle
           lb_l[k] = lb[k];
           ub_l[k] = ub[k];
         }
-        lb_l[i] = std::max(obs->center[i]+obs->size[i]/2+g_security_distance+System_t::r_min, lb_l[i]);
+        if(i = 2)
+          lb_l[i] = std::max(obs->center[i]+obs->size[i]/2+g_security_distance, lb_l[i]);
+        else
+          lb_l[i] = std::max(obs->center[i]+obs->size[i]/2+g_security_distance+System_t::r_min, lb_l[i]);
         gPot[0] = xOpt[0]; gPot[1] = xOpt[1]; gPot[2] = xOpt[2];
         region_t* obsPot = NULL;
         if(obsPot = this->IsInCollision(gPot))
@@ -737,7 +743,10 @@ double FixedWing::Triangle<System_t, State_t, Vector_t, region_t>::AvoidObstacle
   for(int i = 0; i<3; i++)
   {
     int nWSR = 100;
-    ub_l[i] = std::min(obs->center[i]-obs->size[i]/2-g_security_distance-System_t::r_min, ub_l[i]);
+    if(i = 2)
+      ub_l[i] = std::min(obs->center[i]-obs->size[i]/2-g_security_distance, ub_l[i]);
+    else
+      ub_l[i] = std::min(obs->center[i]-obs->size[i]/2-g_security_distance-System_t::r_min, ub_l[i]);
     real_t lb_l2[8] = {lb_l[0], lb_l[1], lb_l[2], lb_l[3], lb_l[4], lb_l[5], lb_l[6], lb_l[7]};
     real_t ub_l2[8] = {ub_l[0], ub_l[1], ub_l[2], ub_l[3], ub_l[4], ub_l[5], ub_l[6], ub_l[7]};
     if(SUCCESSFUL_RETURN == this->VPSolver->hotstart( this->d,lb_l,ub_l,this->lbA,this->ubA, nWSR ))
@@ -752,7 +761,10 @@ double FixedWing::Triangle<System_t, State_t, Vector_t, region_t>::AvoidObstacle
           lb_l[k] = lb[k];
           ub_l[k] = ub[k];
         }
-        ub_l[i] = std::min(obs->center[i]-obs->size[i]/2-g_security_distance-System_t::r_min, ub_l[i]);
+        if(i = 2)
+          ub_l[i] = std::min(obs->center[i]-obs->size[i]/2-g_security_distance, ub_l[i]);
+        else
+          ub_l[i] = std::min(obs->center[i]-obs->size[i]/2-g_security_distance-System_t::r_min, ub_l[i]);
         gPot[0] = xOpt[0]; gPot[1] = xOpt[1]; gPot[2] = xOpt[2];
         region_t* obsPot = NULL;
         if(obsPot = this->IsInCollision(gPot))
