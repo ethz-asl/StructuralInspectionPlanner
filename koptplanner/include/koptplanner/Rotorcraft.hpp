@@ -370,7 +370,7 @@ Vector_t Rotorcraft::Triangle<System_t, State_t, Vector_t, region_t>::dualBarrie
       alfa1 = atan2(g[1]-(*state1)[1], g[0]-(*state1)[0]);
       alfa2 = atan2((*state2)[1]-g[1], (*state2)[0]-g[0]);
     }
-    for(double psi = 0; psi<2*M_PI; psi+=g_angular_discretization_step)
+    for(double psi = -M_PI; psi<M_PI; psi+=g_angular_discretization_step)
     {
       StateVector s = g;
       s[3] = psi;

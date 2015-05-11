@@ -564,7 +564,7 @@ Vector_t FixedWing::Triangle<System_t, State_t, Vector_t, region_t>::dualBarrier
       dp += sqrt(pow((*state1)[0] - g[0],2.0) + pow((*state1)[1] - g[1],2.0) + pow((*state1)[2] - g[2],2.0));
       ds += sqrt(pow((*state2)[0] - g[0],2.0) + pow((*state2)[1] - g[1],2.0) + pow((*state2)[2] - g[2],2.0));
     }
-    for(double psi = 0.0; psi<2.0*M_PI; psi+=g_angular_discretization_step)
+    for(double psi = -M_PI; psi<M_PI; psi+=g_angular_discretization_step)
     {
       StateVector s = g;
       s[3] = 0.0;

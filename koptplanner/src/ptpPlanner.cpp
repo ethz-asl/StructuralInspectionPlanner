@@ -803,6 +803,7 @@ int cplusplus_callback_function(int ID, int ID2)
   {
     plannerArray[ID] = new PTPPlanner();
     StateVector tmp = VP[ID];
+    plannerArray[ID]->stateVec = tmp;
     plannerArray[ID]->initialize(tmp,tmp[0],tmp[1],tmp[2],2.0*g_rrt_scope,2.0*g_rrt_scope,2.0*g_rrt_scope);
     reinitRRTs[ID] = 0;
   }
