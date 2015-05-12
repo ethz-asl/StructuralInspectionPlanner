@@ -25,6 +25,15 @@ Export to DJI drones
 Within *utils/ExportToDJI* a python script called *SIP2DJI.py* reads a CSV file that contains the results of the StructuralInspectionPlanner and writes a DJI drone mission file. To run the script:
 
     $ python SIP2DJI.py -i <inputfile.csv> -o <outputfile.awm>
+    
+Export to RotorS simulator
+-------
+
+Within *utils/ExportToRotorS* a python script called *SIP2RotorS.py* reads a CSV file that contains the results of the StructuralInspectionPlanner and writes a waypoint file. Set maximum velocities and sampling time inside the script. To run the script:
+
+    $ python SIP2RotorS.py -i <inputfile.csv> -o <outputfile.txt>
+
+After running the StructuralInspectionPlanner, find the CSV file at *koptplanner/data/latestPath.csv*.
 
 Tools for Development
 -------
