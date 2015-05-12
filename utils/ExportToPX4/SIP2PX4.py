@@ -21,7 +21,7 @@ from math import pow, cos, sin, sqrt, degrees, radians, atan2, pi
 from scipy import cos, sin, arctan, sqrt, arctan2
 
 # 	Change based on your files and LLA ENU Origin
-LLA_ENU_Point = np.array([47.135388888888890, 8.688611111111111, 919.5254262437646] )
+LLA_ENU_Point = np.array([8.688611111111111, 47.135388888888890, 919.5254262437646] )
 
 # 	Acceptance Radius and Auto flag (PX4-mission related)
 AcceptanceRadius = 50 # radius to consider that the UAV crossed the waypoint
@@ -155,10 +155,10 @@ def main(argv):
 	count = 0
 	for i in range(0,Nx,SparsifyFactor):
 		if i == 0:
-				px4_mission_file.write("%i\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t%.17f\t%.17f\t%.0f\t%i" % (count,1,0,16,0,AcceptanceRadius,0,0,lon[i],lat[i],alt[i],AutoContFlag))
+				px4_mission_file.write("%i\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t%.17f\t%.17f\t%.0f\t%i" % (count,1,0,16,0,AcceptanceRadius,0,0,lat[i],lon[i],alt[i],AutoContFlag))
 				px4_mission_file.write("\r\r\n")
 		else:
-				px4_mission_file.write("%i\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t%.17f\t%.17f\t%.0f\t%i" % (count,0,0,16,0,AcceptanceRadius,0,0,lon[i],lat[i],alt[i],AutoContFlag))
+				px4_mission_file.write("%i\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t%.17f\t%.17f\t%.0f\t%i" % (count,0,0,16,0,AcceptanceRadius,0,0,lat[i],lon[i],alt[i],AutoContFlag))
 				px4_mission_file.write("\r\r\n")
 		count = count + 1	
 
