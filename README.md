@@ -2,7 +2,9 @@ StructuralInspectionPlanner
 ===========================
 **Beta version**
 
-A new structural inspection path planning algorithm presented in our paper contribution [1] is released as an open-source toolbox. The algorithm assumes a triangular mesh representation of the structure and employs an alternating two-step optimization paradigm to find good viewpoints that together provide full coverage and a connecting path that has low cost. In every iteration, the viewpoints are chosen such that the connection cost is reduced and, subsequently, the tour is optimized. Vehicle and sensor limitations are respected within both steps. Sample implementations are provided for rotorcraft and fixed-wing unmanned aerial robots. 
+The structural inspection path planning algorithm presented in our paper contribution [1] is released as an open-source toolbox. The algorithm assumes a triangular mesh representation of the structure and employs an alternating two-step optimization paradigm to find good viewpoints that together provide full coverage and a connecting path that has low cost. In every iteration, the viewpoints are chosen such that the connection cost is reduced and, subsequently, the tour is optimized. Vehicle and sensor limitations are respected within both steps. Sample implementations are provided for rotorcraft and fixed-wing unmanned aerial robots.
+
+Additional functionality allow exportation of the computed paths to drone mission files. Supported systems are PX4/Pixhawk and DJI drones and will be extended in the future.
 
 Installing the toolbox
 ---------------------------
