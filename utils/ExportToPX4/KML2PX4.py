@@ -98,7 +98,7 @@ class KMLParser(object):
                         else:
                             z_ref = self.MissionPars.HeightRef
 
-                        out.write("%i\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t%.17f\t%.17f\t%.0f\t%i" % (count,1,0,16,0,self.MissionPars.AcceptanceRadius,0,0,self.outputdata[0][i][1],self.outputdata[0][i][0],z_ref,self.MissionPars.AutoContFlag))
+                        out.write("%i\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t%.17f\t%.17f\t%.0f\t%i" % (count,1,0,16,0,self.MissionPars.AcceptanceRadius,0,0,self.outputdata[0][i][0],self.outputdata[0][i][1],z_ref,self.MissionPars.AutoContFlag))
                         out.write("\r\r\n")
                     else:
                         if self.MissionPars.HeightRef == -1:
@@ -106,7 +106,7 @@ class KMLParser(object):
                         else:
                             z_ref = self.MissionPars.HeightRef
 
-                        out.write("%i\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t%.17f\t%.17f\t%.0f\t%i" % (count,0,0,16,0,self.MissionPars.AcceptanceRadius,0,0,self.outputdata[0][i][1],self.outputdata[0][i][0],z_ref,self.MissionPars.AutoContFlag))
+                        out.write("%i\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t%.17f\t%.17f\t%.0f\t%i" % (count,0,0,16,0,self.MissionPars.AcceptanceRadius,0,0,self.outputdata[0][i][0],self.outputdata[0][i][1],z_ref,self.MissionPars.AutoContFlag))
                         out.write("\r\r\n")
                     count = count + 1  
                 
