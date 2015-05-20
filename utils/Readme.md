@@ -35,6 +35,15 @@ Within *utils/ExportToRotorS* a python script called *SIP2RotorS.py* reads a CSV
 
 After running the StructuralInspectionPlanner, find the CSV file at *koptplanner/data/latestPath.csv*.
 
+Path to Trajectory
+-------
+
+Within *utils/PathToTrajectory* a python script called *PATH2TRAJ.py* reads a CSV file that contains the results of the StructuralInspectionPlanner and writes an output file that corresponds to a timed-trajectory in case the employed controller requires such an input. The timed-trajectory is based on closed-loop linear simulation and only refers to holonomic systems. To run the script:
+
+    $ python py_compile -O -m PATH2TRAJ.py # to enable basic optimization flags
+    $ python PATH2TRAJ.pyo -i <inputfile> -o <outputfile>
+
+
 Tools for Development
 -------
 
