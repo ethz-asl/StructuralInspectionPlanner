@@ -537,7 +537,7 @@ bool plan(koptplanner::inspection::Request  &req,
       point.pose.orientation.z = q.z();
       point.pose.orientation.w = q.w();
 
-      double scaleVP = sqrt(SQ(problemBoundary.size[0])+SQ(problemBoundary.size[0])+SQ(problemBoundary.size[0]))/70.0;
+      double scaleVP = sqrt(SQ(problemBoundary.size[0])+SQ(problemBoundary.size[1])+SQ(problemBoundary.size[2]))/70.0;
       point.scale.x = scaleVP;
       point.scale.y = scaleVP/25.0;
       point.scale.z = scaleVP/25.0;
