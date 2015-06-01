@@ -368,9 +368,7 @@ float RRTsplus::evalDist(state_t state)
   gettimeofday(&time, NULL);
   time_RRTS_req += time.tv_sec * 1000000 + time.tv_usec;
 #endif
-#ifdef USE_FIXEDWING_MODEL
-  ret /= g_speed;
-#else
+#ifndef USE_FIXEDWING_MODEL
   ret = std::max(ret / g_speed, ANGABS(state[3] - this->root->getState()[3])/g_maxAngularSpeed);
 #endif
   return ret;
@@ -619,7 +617,11 @@ int cplusplus_callback_publish(int* Tour, int Dim, GainType Cost)
   if(Tour)
     PTPPlanner::Tour_ = T;
   
-  double cost_new = ((double)(int)Cost)/((double)g_scale);
+#ifndef USE_FIXEDWING_MODEL
+  double cost_new = ((double)(int)Cost)/(g_scale);
+#else
+  double cost_new = ((double)(int)Cost)/(g_speed*g_scale);
+#endif
   if(g_cost > cost_new)
   {
     ROS_INFO("New tour cost = %2.2f", cost_new);
@@ -736,27 +738,12 @@ int cplusplus_callback_publish(int* Tour, int Dim, GainType Cost)
   if(!f.is_open())
     ROS_ERROR("path not found");
   f << "";
-  for(std::vector<geometry_msgs::PoseStamped>::iterator it = res_g->inspectionPath.poses.begin(); it != res_g->inspectionPath.poses.end()-1; it++)
+  for(std::vector<geometry_msgs::PoseStamped>::iterator it = res_g->inspectionPath.poses.begin(); it != res_g->inspectionPath.poses.end(); it++)
   {
-    double dist = pow(it->pose.position.x - (it+1)->pose.position.x,2)+pow(it->pose.position.y - (it+1)->pose.position.y,2)+pow(it->pose.position.z - (it+1)->pose.position.z,2);
-    dist = sqrt(dist);
-    double mps = 1000;
-    for(int i = 0; i<1; i++)
-    {
-      visualization_msgs::Marker point;
-      double id = i;
-      point.pose.position.x = it->pose.position.x * (1-id/10) + (it+1)->pose.position.x * id/10;
-      point.pose.position.y = it->pose.position.y * (1-id/10) + (it+1)->pose.position.y * id/10;
-      point.pose.position.z = it->pose.position.z * (1-id/10) + (it+1)->pose.position.z * id/10;
-      point.pose.orientation.x = it->pose.orientation.x * (1-id/10) + (it+1)->pose.orientation.x * id/10;
-      point.pose.orientation.y = it->pose.orientation.y * (1-id/10) + (it+1)->pose.orientation.y * id/10;
-      point.pose.orientation.z = it->pose.orientation.z * (1-id/10) + (it+1)->pose.orientation.z * id/10;
-      point.pose.orientation.w = it->pose.orientation.w * (1-id/10) + (it+1)->pose.orientation.w * id/10;
-      tf::Pose pose;
-      tf::poseMsgToTF(point.pose, pose);
-      double yaw_angle = tf::getYaw(pose.getRotation());
-      f << point.pose.position.x << "," << point.pose.position.y << "," << point.pose.position.z << ",0,0," << yaw_angle << "\n";
-    }
+    tf::Pose pose;
+    tf::poseMsgToTF(it->pose, pose);
+    double yaw_angle = tf::getYaw(pose.getRotation());
+    f << it->pose.position.x << "," << it->pose.position.y << "," << it->pose.position.z << ",0,0," << yaw_angle << "\n";
   }
   f.close();
   return 1;
@@ -836,7 +823,7 @@ int cplusplus_callback_function(int ID, int ID2)
 #ifndef USE_FIXEDWING_MODEL
       return (int) std::min((double)INT_MAX-1,std::max(distLazy/g_speed, ANGABS(VP[ID][3]-VP[ID2][3])/g_maxAngularSpeed) * g_scale);
 #else
-      return (int) std::min((double)INT_MAX-1,(((double)(distLazy * g_scale))/g_speed + 0.5));
+      return (int) std::min((double)INT_MAX-1,(((double)(distLazy * g_scale)) + 0.5));
 #endif
     }
   }

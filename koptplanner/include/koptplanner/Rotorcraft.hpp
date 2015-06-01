@@ -650,7 +650,7 @@ double Rotorcraft::System<Trajectory_t, State_t, region_t>::evaluateExtensionCos
     double distCurr = stateTowardsIn.x[i] - stateFromIn.x[i];
     distTotal += distCurr*distCurr;
   }
-  return distTotal;
+  return sqrt(distTotal);
 }
 
 template<class System_t, class State_t, class Vector_t, class region_t>

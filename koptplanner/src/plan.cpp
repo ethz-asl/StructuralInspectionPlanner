@@ -169,7 +169,11 @@ bool plan(koptplanner::inspection::Request  &req,
   ros::param::get("~/algorithm/lazy_obstacle_check", g_lazy_obstacle_check);
   ros::param::get("~/algorithm/security_distance", g_security_distance);
   
+#ifdef USE_FIXEDWING_MODEL
+  g_scale = 1.0e5/sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1])+SQ(req.spaceSize[2]));
+#else
   g_scale = g_speed*1.0e5/sqrt(SQ(req.spaceSize[0])+SQ(req.spaceSize[1])+SQ(req.spaceSize[2]));
+#endif
   
   if(lookupTable)
   {
@@ -260,12 +264,17 @@ bool plan(koptplanner::inspection::Request  &req,
     tmp->x1[0] = itFixedPoses->position.x;
     tmp->x1[1] = itFixedPoses->position.y;
     tmp->x1[2] = itFixedPoses->position.z;
+    tf::Pose pose;
+    tf::poseMsgToTF(*itFixedPoses, pose);
+    double yaw_angle = tf::getYaw(pose.getRotation());
 #ifdef USE_ROTORCRAFT_MODEL
-    tmp->x2[0] = itFixedPoses->orientation.z;
+    tmp->x2[0] = yaw_angle;
+    tmp->x2[1] = 0.0;
+    tmp->x2[2] = 0.0;
 #elif defined USE_FIXEDWING_MODEL
-    tmp->x2[0] = itFixedPoses->orientation.x;
-    tmp->x2[1] = itFixedPoses->orientation.y;
-    tmp->x2[2] = itFixedPoses->orientation.z;
+    tmp->x2[0] = 0.0;
+    tmp->x2[1] = 0.0;
+    tmp->x2[2] = yaw_angle;
 #endif
     tmp->Fixpoint = true;
     tri.push_back(tmp);
@@ -349,13 +358,10 @@ bool plan(koptplanner::inspection::Request  &req,
       ((req.requiredPoses.end()-1)->position.x != req.requiredPoses[0].position.x ||
       (req.requiredPoses.end()-1)->position.y != req.requiredPoses[0].position.y ||
       (req.requiredPoses.end()-1)->position.z != req.requiredPoses[0].position.z ||
-#ifdef USE_ROTORCRAFT_MODEL
-      (req.requiredPoses.end()-1)->orientation.z != req.requiredPoses[0].orientation.z))
-#elif defined USE_FIXEDWING_MODEL
       (req.requiredPoses.end()-1)->orientation.x != req.requiredPoses[0].orientation.x ||
       (req.requiredPoses.end()-1)->orientation.y != req.requiredPoses[0].orientation.y ||
-      (req.requiredPoses.end()-1)->orientation.z != req.requiredPoses[0].orientation.z))
-#endif
+      (req.requiredPoses.end()-1)->orientation.z != req.requiredPoses[0].orientation.z ||
+      (req.requiredPoses.end()-1)->orientation.w != req.requiredPoses[0].orientation.w))
   {
     g_closed_tour = false;
     endPoint = true;
@@ -363,12 +369,17 @@ bool plan(koptplanner::inspection::Request  &req,
     tmp->x1[0] = (req.requiredPoses.end()-1)->position.x;
     tmp->x1[1] = (req.requiredPoses.end()-1)->position.y;
     tmp->x1[2] = (req.requiredPoses.end()-1)->position.z;
+    tf::Pose pose;
+    tf::poseMsgToTF(*(req.requiredPoses.end()-1), pose);
+    double yaw_angle = tf::getYaw(pose.getRotation());
 #ifdef USE_ROTORCRAFT_MODEL
-    tmp->x2[0] = (req.requiredPoses.end()-1)->orientation.z;
+    tmp->x2[0] = yaw_angle;
+    tmp->x2[1] = 0.0;
+    tmp->x2[2] = 0.0;
 #elif defined USE_FIXEDWING_MODEL
-    tmp->x2[0] = (req.requiredPoses.end()-1)->orientation.x;
-    tmp->x2[1] = (req.requiredPoses.end()-1)->orientation.y;
-    tmp->x2[2] = (req.requiredPoses.end()-1)->orientation.z;
+    tmp->x2[0] = 0.0;
+    tmp->x2[1] = 0.0;
+    tmp->x2[2] = yaw_angle;
 #endif
     tmp->Fixpoint = true;
     tri.push_back(tmp);

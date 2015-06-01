@@ -8,6 +8,6 @@ rotorcraft/maxSpeed: 0.25
 rotorcraft/maxAngularSpeed: 0.5
 
 #fixed-wing parameters
-fixedwing/speed: 1.0
+fixedwing/speed: 10.0
 fixedwing/Rmin: 60.0
 fixedwing/maxClimbSinkRate: 0.1
