@@ -74,13 +74,13 @@ References:
 
 If you use this software in a scientific publication, please cite the following paper:
 ```
-@INPROCEEDINGS{bircher15inspection, 
+@INPROCEEDINGS{BABOOMS_ICRA_15, 
 author = "{A. Bircher, K. Alexis, M. Burri, P. Oettershagen, S. Omari, T. Mantel and R. Siegwart}",
-booktitle = {Robotics and Automation (ICRA), 2015 IEEE International Conference on}, 
+booktitle = {Robotics and Automation (ICRA), 2014 IEEE International Conference on}, 
 title={Structural Inspection Path Planning via Iterative Viewpoint Resampling with Application to Aerial Robotics},
 year={2015}, 
 month={May}, 
-note = {(accepted)},
+pages={6423-6430}, 
 }
 ```
 
