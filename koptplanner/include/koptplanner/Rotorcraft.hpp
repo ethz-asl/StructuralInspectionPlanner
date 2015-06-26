@@ -192,8 +192,8 @@ Vector_t Rotorcraft::Triangle<System_t, State_t, Vector_t, region_t>::dualBarrie
   for(int i = 0; i<DIMENSIONALITY; i++)
     best[i] = 0;
   double cost = DBL_MAX;
-  double angleLower = g_camPitch+g_camAngleVertical/2.0 - 0*M_PI/180;
-  double angleUpper = g_camPitch-g_camAngleVertical/2.0 + 0*M_PI/180;
+  double angleLower = g_camPitch+g_camAngleVertical/2.0;
+  double angleUpper = g_camPitch-g_camAngleVertical/2.0;
   int maxPW = 12;
   double psiInc = 2*M_PI/maxPW;
   Vector3f m = (this->x1+this->x2+this->x3)/3;
