@@ -113,12 +113,14 @@ include_directories(
 add_executable(request src/requester.cpp)
 add_executable(bigBen src/bigBen.cpp)
 add_executable(hoaHakanaia src/hoaHakanaia.cpp)
+add_executable(solarPlant src/solarPlant.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 add_dependencies(request koptplanner_generated_messages_cpp)
 add_dependencies(bigBen koptplanner_generated_messages_cpp)
 add_dependencies(hoaHakanaia koptplanner_generated_messages_cpp)
+add_dependencies(solarPlant koptplanner_generated_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(request
@@ -128,6 +130,9 @@ target_link_libraries(bigBen
   ${catkin_LIBRARIES}
 )
 target_link_libraries(hoaHakanaia
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(solarPlant
   ${catkin_LIBRARIES}
 )
 

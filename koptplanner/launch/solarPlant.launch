@@ -1,0 +1,6 @@
+<launch>
+    <node name="Inspection_Planner" pkg="koptplanner" type="plan" clear_params="true" output="screen">
+	    <rosparam file="$(find koptplanner)/solarPlantParam.yaml"/>
+    </node>
+</launch>
+

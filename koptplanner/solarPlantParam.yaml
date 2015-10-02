@@ -1,0 +1,13 @@
+#camera parameters
+camera/horizontal: deg(120)
+camera/vertical: deg(90)
+camera/pitch: deg(25)
+
+#rotorcraft parameters
+rotorcraft/maxSpeed: 0.5
+rotorcraft/maxAngularSpeed: 0.5
+
+#fixed-wing parameters
+fixedwing/speed: 10.0
+fixedwing/Rmin: 60.0
+fixedwing/maxClimbSinkRate: 0.1
